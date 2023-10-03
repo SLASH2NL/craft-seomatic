@@ -303,6 +303,19 @@ class MetaBundles extends Component
 
             $metaBundleRecord->setAttributes($metaBundle->getAttributes(), false);
 
+            if (
+                $metaBundle->sourceBundleType === 'section' &&
+                $metaBundle->sourceHandle === 'courses' &&
+                strpos($metaBundleRecord->metaGlobalVars, '"seoTitle":"{') === false
+            ) {
+                $backtrace = \Spatie\Backtrace\Backtrace::create()->withArguments()->reduceArguments();
+
+                Craft::error("Possible update mismatch", 'seomatic');
+                Craft::error("Site ID: " . json_encode($siteId), 'seomatic');
+                Craft::error("MetaBundle: " . json_encode($metaBundle), 'seomatic');
+                Craft::error("Backtrace: " . json_encode($backtrace->frames()), 'seomatic');
+            }
+
             if ($metaBundleRecord->save()) {
                 Craft::info(
                     'Meta bundle updated: '

@@ -45,6 +45,7 @@
     "nystudio107/craft-code-editor": "^1.0.0",
     "php-science/textrank": "^1.0.3",
     "davechild/textstatistics": "^1.0.3",
+    "spatie/backtrace": "^1.5",
     "sunra/php-simple-html-dom-parser": "^1.5.2"
   },
   "scripts": {
